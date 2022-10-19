@@ -81,31 +81,59 @@
                 <h2>INFORMACIÓN<br>DE CONTACTO</h2>
             </section>
             <section class="info_items">
-                <p><span class="fa fa-envelope"></span> correo@gmail.com</p>
-                <p><span class="fa fa-mobile"></span> +52 1 427 000 0000</p>
+                <p><span class="fa fa-envelope"></span> duoonce11@gmail.com</p>
+                <p><span class="fa fa-mobile"></span> +52 1 427 128 7167</p>
             </section>
         </section>
 
-        <form action="" class="form_contact">
-            <h2>Envia un mensaje</h2>
-            <div class="user_info">
-                <label for="names">Nombres *</label>
-                <input type="text" id="names">
-
-                <label for="phone">Telefono / Celular</label>
-                <input type="text" id="phone">
-
-                <label for="email">Correo electronico *</label>
-                <input type="text" id="email">
-
-                <label for="mensaje">Mensaje *</label>
-                <textarea id="mensaje"></textarea>
-
-                <button>Enviar Mensaje</button>
-            </div>
+        <form class="form_contact" action="https://formspree.io/f/xgeqlyvd" method="POST">
+            <label>
+                Nombre*:
+                <input type="name" name="name">
+            </label>
+            <br>
+            <label>
+                Telefono*:
+                <input type="number" name="number">
+            </label>
+            <br>
+            <label>
+                Email*:
+                <input type="email" name="email">
+            </label>
+            <br>
+            <label>
+                Mensaje*:
+                <textarea name="message"></textarea>
+            </label>
+            <br>
+            <!-- your other form fields go here -->
+            <button type="submit" class="btn btn-outline-info">Enviar</button>
         </form>
 
     </section>
+
+    <script>
+        const $form = document.querySelector('form')
+
+        $form.addEventListener('submit', handlesubmit)
+
+        async function handlesubmit(event) {
+            event.preventDefault()
+            const form = new FormData(this)
+            const response = await fetch(this.action, {
+                method: this.method,
+                body: form,
+                headers: {
+                    'Accept': 'aplication/json'
+                }
+            })
+            if (response.ok) {
+                this.reset()
+                alert('Mensaje enviado con exito!!')
+            }
+        }
+    </script>
 
 
     <!--------------------- Pie de pagina --------------------->
